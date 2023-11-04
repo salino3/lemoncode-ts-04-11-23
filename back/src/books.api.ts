@@ -10,9 +10,13 @@ import {
 export const booksApi = Router();
 
 booksApi
-  .get("/", async (req, res) => {
-    const bookList = await getBookList();
-    res.send(bookList);
+  .get("/", async (req, res, next) => {
+   try {
+     const bookList = await getBookList();
+     res.send(bookList);
+   } catch (error) {
+     next(error);
+   }
   })
   .get("/:id", async (req, res) => {
     const { id } = req.params;
