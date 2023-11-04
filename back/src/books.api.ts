@@ -22,6 +22,10 @@ booksApi
     const { id } = req.params;
     const bookId = Number(id);
     const book = await getBook(bookId);
+      res.cookie("my-cookie", "my-token", {
+     sameSite: "none",
+     secure: true, 
+   });
     res.send(book);
   })
   .post("/", async (req, res) => {
